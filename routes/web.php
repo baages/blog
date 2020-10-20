@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaticPagesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +36,12 @@ Route::delete('logout', [SessionsController::class, 'destroy'])->name('logout');
 Route::get('/users{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 
 Route::get('signup/confirm/{token}', [UserController::class, 'confirmEmail'])->name('confirm_email');
+
+// 显示重置密码的邮箱发送页面
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+// 邮箱发送重设链接
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+// 密码更新页面
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+// 执行密码更新操作
+Route::post('password/reset', [ResetPasswordController::class , 'reset'])->name('password.update');
