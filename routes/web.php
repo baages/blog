@@ -32,3 +32,5 @@ Route::post('login', [SessionsController::class, 'store'])->name('login');
 Route::delete('logout', [SessionsController::class, 'destroy'])->name('logout');
 
 Route::get('/users{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+
+Route::get('signup/confirm/{token}', [UserController::class, 'confirmEmail'])->name('confirm_email');
