@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\StatusesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,8 @@ Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEm
 Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 // 执行密码更新操作
 Route::post('password/reset', [ResetPasswordController::class , 'reset'])->name('password.update');
+
+// 处理创建微博的请求
+// 处理删除微博的请求
+Route::resource('statuses', StatusesController::class, ['only' => ['store', 'destroy']]);
+//Route::resource('statuses', StatusesController::class);
