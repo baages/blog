@@ -7,6 +7,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\StatusesController;
+use App\Http\Controllers\FollowersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +56,8 @@ Route::resource('statuses', StatusesController::class, ['only' => ['store', 'des
 Route::get('/users/{user}/followings', [UserController::class, 'followings'])->name('users.followings');
 // 显示用户的粉丝列表
 Route::get('/users/{user}/followers', [UserController::class, 'followers'])->name('users.followers');
+
+// 关注用户
+Route::post('/users/followers/{user}', [FollowersController::class, 'store'])->name('followers.store');
+// 取消关注用户
+Route::delete('users/followers/{user}', [FollowersController::class, 'destroy'])->name('followers.destroy');
